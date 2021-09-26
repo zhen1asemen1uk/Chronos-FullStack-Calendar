@@ -3,10 +3,9 @@ import React from 'react';
 import stl from './Calendar.module.css'
 
 const Calendar = (props) => {
-   const { weekStartDay, today } = props;
+   const { today, arrDays } = props;
 
-   let day = weekStartDay.clone().subtract(1, 'day');
-   const arrDays = [...Array(42)].map(() => day.add(1, 'day').clone());
+
    return (
       <div className={stl.wrapp}>{
          arrDays.map((numDay) => {

@@ -7,8 +7,8 @@ import {
 } from "./types"
 
 const initialState = {
-   _startWeek_Monday: moment.updateLocale('en', { week: { dow: 1 } }),
-   today: moment()
+   _startWeek_Monday: moment.updateLocale('en', { week: { dow: 1 } }),//start week: Monday
+   today: moment()//day on screen calendar
 
 }
 

@@ -1,29 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import moment from 'moment';
+// import { useSelector } from 'react-redux';
 
-import Calendar from './components/Calendar/Calendar';
 import HeaderBar from './components/HeaderBar/HeaderBar';
 import WeekBar from './components/WeekBar/WeekBar';
 import ControlBarConteiner from './components/ControlBar/ControlBarConteiner';
+import CalendarConteiner from './components/Calendar/CalendarConteiner';
 import stl from './style/App.module.css';
 
 const App = () => {
-  moment.updateLocale('en', { week: { dow: 1 } });
-  const today = useSelector(state => state.calendarStore.today);
-  
-  //start week: Monday
+  // const today = useSelector(state => state.calendarStore.today);
 
-  let weekStartDay = today.clone().startOf('month').startOf('week');
-  let weekEndDay = today.clone().endOf('month').endOf('week');
-  let day = weekStartDay.clone();
+  // let weekStartDay = today.clone().startOf('month').startOf('week');
+  // let weekEndDay = today.clone().endOf('month').endOf('week');
+  // let day = weekStartDay.clone();
 
-  let calendarArr = [];
+  // let calendarArr = [];
 
   //fill calendar
-  for (let i = weekEndDay; !day.isAfter(i); day.add(1, 'day')) {
-    calendarArr.push(day.clone());
-  }
+  // for (let i = weekEndDay; !day.isAfter(i); day.add(1, 'day')) {
+  //   calendarArr.push(day.clone());
+  // }
 
   return (
     <div className={stl.conteiner}>
@@ -32,7 +28,7 @@ const App = () => {
         <HeaderBar />
         <ControlBarConteiner />
         <WeekBar />
-        <Calendar weekStartDay={weekStartDay} today={today} />
+        <CalendarConteiner />
       </div>
     </div>
   );
