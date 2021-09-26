@@ -46,3 +46,7 @@
    border: 1px solid red;
    background-color: red;
 }
+
+.numAnotherMonth{
+   opacity: 0.35;
+}

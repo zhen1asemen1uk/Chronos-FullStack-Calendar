@@ -1,10 +1,10 @@
 import React from 'react';
 // import { useSelector } from 'react-redux';
 
-import HeaderBar from './components/HeaderBar/HeaderBar';
 import WeekBar from './components/WeekBar/WeekBar';
-import ControlBarConteiner from './components/ControlBar/ControlBarConteiner';
 import CalendarConteiner from './components/Calendar/CalendarConteiner';
+import HeaderBarConteiner from './components/HeaderBar/HeaderBarConteiner';
+import ControlBarConteiner from './components/ControlBar/ControlBarConteiner';
 import stl from './style/App.module.css';
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
     <div className={stl.conteiner}>
       <h1>Hello calendar</h1>
       <div className={stl.wrapp}>
-        <HeaderBar />
+        <HeaderBarConteiner />
         <ControlBarConteiner />
         <WeekBar />
         <CalendarConteiner />

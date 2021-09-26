@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import stl from './HeaderBar.module.css';
 
-const HeaderBar = () => {
+const HeaderBar = (props) => {
    const [search, setSearch] = useState('');
 
    return (
@@ -20,6 +20,7 @@ const HeaderBar = () => {
          </div>
 
          <div className={stl.wrappINP}>
+            
             <input type="search" className={stl.searchINP}
                onChange={(e) => { setSearch(e.target.value) }} 
                value={search}  placeholder="Search"/>
