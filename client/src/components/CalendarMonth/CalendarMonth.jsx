@@ -1,8 +1,8 @@
 import React from 'react';
 
-import stl from './Calendar.module.css'
+import stl from './CalendarMonth.module.css'
 
-const Calendar = (props) => {
+const CalendarMonth = (props) => {
    const { today, arrDays } = props;
 
    return (
@@ -39,4 +39,4 @@ const Calendar = (props) => {
    );
 };
 
-export default Calendar;
+export default CalendarMonth;

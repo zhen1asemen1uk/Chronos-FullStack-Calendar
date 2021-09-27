@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { NavLink } from 'react-router-dom';
 import stl from './HeaderBar.module.css';
 
 const HeaderBar = (props) => {
@@ -13,17 +13,17 @@ const HeaderBar = (props) => {
          </div>
 
          <div className={stl.fourBTN}>
-            <button className={stl.btn}>Day</button>
-            <button className={stl.btn}>Week</button>
-            <button className={stl.btn}>Month</button>
-            <button className={stl.btn}>Year</button>
+            <NavLink to='/day' className={stl.btn}>Day</NavLink>
+            <NavLink to='/week' className={stl.btn} >Week</NavLink>
+            <NavLink to='/month' className={stl.btn}>Month</NavLink>
+            <NavLink to='/year' className={stl.btn}>Year</NavLink>
          </div>
 
          <div className={stl.wrappINP}>
-            
+
             <input type="search" className={stl.searchINP}
-               onChange={(e) => { setSearch(e.target.value) }} 
-               value={search}  placeholder="Search"/>
+               onChange={(e) => { setSearch(e.target.value) }}
+               value={search} placeholder="Search" />
          </div>
 
       </div>

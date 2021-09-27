@@ -12,7 +12,7 @@ const initialState = {
 
 }
 
-export const calendarReducer = (state = initialState, action) => {
+export const monthReducer = (state = initialState, action) => {
    switch (action.type) {
       case prevMonth_Type:
          return { ...state, today: action.payload }

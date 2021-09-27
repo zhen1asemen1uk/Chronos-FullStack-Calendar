@@ -8,12 +8,12 @@ import {
    nextMonth,
    prevMonth,
    todayMonth
-} from '../../reducers/calendarReducer/calendarReducer';
+} from '../../../reducers/monthReducer/monthReducer';
 import stl from './ControlBar.module.css'
 
 const ControlBarConteiner = () => {
    const dispatch = useDispatch();
-   const today = useSelector(state => state.calendarStore.today);
+   const today = useSelector(state => state.monthStore.today);
 
    const prevHandler = () => {
       dispatch(prevMonth(today.clone().subtract(1, 'month')));
