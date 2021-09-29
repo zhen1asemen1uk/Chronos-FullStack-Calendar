@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(`public`));
 
 
-// app.use(require(`./routers`));
+app.use(require(`./routers`));
 
 app.use((req, res) => {
    res.status(404).send(`Unknown Request`)
@@ -30,7 +30,7 @@ app.use((req, res) => {
 async function start() {
    try {
       const dbName = (`calendar(chronos)`);
-      const url = `mongodb+srv://${DB_LOGIN}:${DB_PASSWORD}@cluster0.gluco.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+      const url = `mongodb+srv://${DB_LOGIN}:${DB_PASSWORD}@cluster0.gluco.mongodb.net/`;
 
       await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
       // const client = new mongoose(url, { useNewUrlParser: true, useUnifiedTopology: true });

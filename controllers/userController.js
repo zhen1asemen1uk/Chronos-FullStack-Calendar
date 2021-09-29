@@ -58,10 +58,11 @@ module.exports = {
          const link = req.params.link;
 
          let activeUser = await userModel.activateUser_check(link);
-
-         if (!activeUser[0].length > 0) {
-            return res.send(`Uncorrect user!`);
-         }
+      
+            if (!activeUser) {
+               return res.send(`Uncorrect user!`);
+            }
+            console.log(activeUser);
 
          await userModel.activateUser_updateVerify(link);
 
@@ -88,7 +89,7 @@ module.exports = {
          const user_id = req.params.user_id;
          let user = await userModel.getUserByID(user_id);
 
-         return res.json(user[0]);
+         return res.json(user);
       } catch (error) {
          console.log(error);
          res.send(`Error get user by id`);
@@ -141,9 +142,8 @@ module.exports = {
          const owner = req.params.user_id;
          //check unique users
          let check = await userModel.getUser(login, email);
-         let [rows, fields] = check;
-
-         if (rows.length > 0) {
+       
+         if (check.length > 0) {
             return res.send(`Login or email is already in use!`);
          }
 
@@ -212,6 +212,3 @@ module.exports = {
 
    }
 }
-
-
-module.exports = new userController();

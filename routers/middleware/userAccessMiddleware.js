@@ -17,14 +17,14 @@ module.exports = function () {
 
             const user_id = req.params.user_id;
             const userForChange = await userModel.getUserByID(user_id);
+            console.log(userForChange);
+            if (userForChange) {
 
-            if (userForChange[0].length > 0) {
-
-               if (decodedToken.login == userForChange[0][0].login) {
+               if (decodedToken.login == userForChange.login) {
 
                   return next();
                }
-               return res.send(`You can't delete/update ${userForChange[0][0].login}!`);
+               return res.send(`You can't delete/update ${userForChange.login}!`);
             } else {
                return res.send(`Uncorrect user id`);
             }

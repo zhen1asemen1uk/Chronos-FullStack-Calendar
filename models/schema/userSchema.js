@@ -1,18 +1,23 @@
 const { Schema, model } = require('mongoose');
-const ObjectId = Schema.ObjectId;
-console.log(ObjectId);
 
 const user = new Schema({
-   _id: ObjectId,
    login: { type: String, required: true },
    password: { type: String, min: 6, required: true },
    email: { type: String, required: true },
    avatar: { type: String, default: './user' },
-   activationLink: { String },
+   activationLink: { type: String },
    status: { type: String, default: 'user' },
    verify: { type: Boolean, default: false },
-   date: { type: Date, default: Date.now }
-   
+   createdAt: { type: Date, default: Date.now },
+   events: [{
+      title: { type: String, required: true },
+      desc: { type: String },
+      date: { type: Date }
+   }],
+   tokens: [{
+      refreshToken: { type: String },
+      accessToken: { type: String }
+   }]
 });
 
-module.exports = model('userSchema', user);
+module.exports = model('users', user);

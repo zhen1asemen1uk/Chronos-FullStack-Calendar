@@ -1,9 +1,8 @@
 const userSchema = require("./schema/userSchema");
 
-
 module.exports = {
    async getAllUser() {
-      return await new userSchema.find({});
+      return await userSchema.find({});
    }
    ,
    async getUser(login, email) {
@@ -12,17 +11,15 @@ module.exports = {
    }
    ,
    async addUser(login, password, email, avatar, activationLink) {
-      // const user = await new userSchema({ login, password, email, avatar, activationLink });
       const user = await new userSchema({ login, password, email, avatar, activationLink });
-      // console.log(user.inserOne);
-      console.log(user  );
-
-      return await userSchema.save();
+      return await user.save();
    }
    ,
    async loginUser(login) {
-      return await dbConnection.getConnection(`
-      SELECT * FROM users WHERE login = "${login}" OR email = "${login}";`);
+      return await userSchema.findOne({ login: login });
+
+      // return await dbConnection.getConnection(`
+      // SELECT * FROM users WHERE login = "${login}" OR email = "${login}";`);
    }
    ,
    async activateUser_check(link) {
@@ -30,31 +27,27 @@ module.exports = {
    }
    ,
    async activateUser_updateVerify(link) {
-      return await dbConnection.getConnection(`
-      UPDATE users SET verify='true' WHERE activationLink='${link}';`);
+      return await userSchema.findOneAndUpdate({ activationLink: link }, { verify: true });
    }
    ,
    async updateActivationLink(id, link) {
-      return await dbConnection.getConnection(`
-      UPDATE users SET activationLink='${link}' WHERE id='${id}';`);
+      return await userSchema.findOneAndUpdate({ _id: id }, { activationLink: link, verify: false });
+      // return await dbConnection.getConnection(`
+      // UPDATE users SET activationLink='${link}' WHERE id='${id}';`);
    }
    ,
    async checkVerifyUser(login) {
-      return await dbConnection.getConnection(`
-      SELECT verify FROM users WHERE login='${login}' OR email='${login}';`)
+      return await userSchema.findOne({ login });
+      // return await dbConnection.getConnection(`
+      // SELECT verify FROM users WHERE login='${login}' OR email='${login}';`)
    }
    ,
    async getUserByID(user_id) {
-      return await new userSchema.findById(user_id);
+      return await userSchema.findById({ _id: user_id });
    }
    ,
    async resetPass_userId(id, pass) {
-      let user = await userSchema.findOne({ id });
-      console.log(user);
-      user.password = pass;
-      console.log(user);
-
-      return userSchema.save();
+      return await userSchema.findOneAndUpdate({ _id: id }, { password:pass});
    }
    ,
    async addUser_ADMIN(login, password, email, avatar, status, verify, activationLink) {
@@ -65,45 +58,23 @@ module.exports = {
    }
    ,
    async deleteUserByID(user_id) {
-      return await dbConnection.getConnection(`
-      DELETE FROM users WHERE id=${user_id};`);
+      return await userSchema.findOneAndDelete({ _id: user_id });
    }
    ,
    async updateLoginByID(id, login) {
-      let user = await userSchema.findOne({ _id: id });
-      console.log(user);
-      user.login = login;
-      console.log(user);
-
-      return userSchema.save();
+      return await userSchema.findByIdAndUpdate({ _id: id }, { login: login });
    }
    ,
    async updateEmailByID(id, email) {
-      let user = await userSchema.findOne({ _id: id });
-      console.log(user);
-      user.email = email;
-      user.verify = false;
-      console.log(user);
-
-      return userSchema.save();
+      return await userSchema.findOneAndUpdate({ _id: id }, { email: email });
    }
    ,
    async updatePasswordByID(id, password) {
-      let user = await userSchema.findOne({ _id: id });
-      console.log(user);
-      user.password = password;
-      console.log(user);
-
-      return userSchema.save();
+      return await userSchema.findOneAndUpdate({ _id: id }, { password: password });
    }
    ,
    async updateAvatarByID(id, avatar) {
-      let user = await userSchema.findOne({ _id: id });
-      console.log(user);
-      user.avatar = avatar;
-      console.log(user);
-
-      return userSchema.save();
+      return await userSchema.findByIdAndUpdate({ _id: id }, { avatar: avatar });
    }
 
 }

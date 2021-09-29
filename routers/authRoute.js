@@ -9,7 +9,7 @@ router.post(`/register`, authController.register);
 
 router.post(`/login`, verifyMiddleware(), authController.login);
 
-router.post(`/logout`, authController.logout);
+// router.post(`/logout`, authController.logout);
 
 router.get(`/refresh`, authController.refresh);
 
