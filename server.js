@@ -1,10 +1,9 @@
-const express = require('express');
 require('dotenv').config();
+const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 
-const PORT = process.env.PORT || 5000;
-const HOST = process.env.HOST || `http://localhost:`;
-const CLIENT_URL = process.env.CLIENT_URL || `http://localhost:3000`;
+const { PORT, HOST, CLIENT_URL, DB_PASSWORD, DB_LOGIN } = process.env;
 
 const cors = require(`cors`);
 const cookieParser = require(`cookie-parser`);
@@ -22,28 +21,35 @@ app.use(cookieParser());
 app.use(express.static(`public`));
 
 
-app.use(require(`./routers`));
+// app.use(require(`./routers`));
 
 app.use((req, res) => {
    res.status(404).send(`Unknown Request`)
 })
 
+async function start() {
+   try {
+      const dbName = (`calendar(chronos)`);
+      const url = `mongodb+srv://${DB_LOGIN}:${DB_PASSWORD}@cluster0.gluco.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
-app.listen(PORT,()=>{
-   console.log(`Server started...\n On => ${HOST}${PORT}`);
-})
-// const dbPassword = process.env.dbPassword;
-// const dbLogin = process.env.dbLogin;
-// console.log(dbPassword);
-// console.log(dbLogin);
+      await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+      // const client = new mongoose(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// const { MongoClient } = require('mongodb');
+      // client.connect(err => {
+      //    const collection = client.db(dbName).collection(`users`);
 
-// const uri = `mongodb+srv://${dbLogin}:${dbPassword}@cluster0.gluco.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+      //    collection.cre
 
-// client.connect(err => {
-//    const collection = client.db(`test`).collection(`devices`);
-//    // perform actions on the collection object
-//    client.close();
-// });
+      //    console.log(collection);
+      //    client.close();
+      // });
+
+      app.listen(PORT, () => {
+         console.log(`Server started...\n On => ${HOST}${PORT}`);
+      });
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+   start();
