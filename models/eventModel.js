@@ -3,7 +3,7 @@ const userSchema = require("./schema/userSchema");
 
 module.exports ={
    async getAllEvents() {
-      return await userSchema.find();
+      // return await userSchema.find();
       return await dbConnection.getConnection(`
       SELECT * FROM users INNER JOIN Events ON users.id=Events.id_author_Event ORDER BY 6 DESC;`);
    }

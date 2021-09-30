@@ -50,8 +50,7 @@ module.exports = {
    ,
    async addUser_ADMIN(login, password, email, avatar, status, verify, activationLink) {
       const user = await new userSchema({ login, password, email, avatar, status, verify, activationLink });
-
-      return await userSchema.save();
+      return await user.save();
    }
    ,
    async deleteUserByID(user_id) {

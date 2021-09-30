@@ -19,7 +19,7 @@ module.exports = {
    }
 
    , async delete(refreshToken) {
-      return await userSchema.findOneAndReplace({ refreshToken: refreshToken });
+      return await userSchema.findOneAndReplace({ refreshToken: refreshToken });//!!!!!!!????????
       // return await dbConnection.getConnection(`
       // DELETE FROM tokens WHERE refreshToken='${refreshToken}';`);
    }
