@@ -1,41 +1,42 @@
 const dbConnection = require("../db/dbConnection");
+const userSchema = require("./schema/userSchema");
 
 module.exports ={
-   async getAllPosts() {
+   async getAllEvents() {
+      return await userSchema.find();
       return await dbConnection.getConnection(`
-      SELECT * FROM users INNER JOIN posts ON users.id=posts.id_author_post ORDER BY 6 DESC;`);
-      // SELECT * FROM users INNER JOIN posts ON users.id=posts.id_author_post ORDER BY 6 DESC LIMIT ${page},${size};`);
+      SELECT * FROM users INNER JOIN Events ON users.id=Events.id_author_Event ORDER BY 6 DESC;`);
    }
 
-   ,async getPostByID(id) {
+   ,async getEventByID(id) {
       return await dbConnection.getConnection(`
-      SELECT * FROM posts WHERE id=${id};`);
+      SELECT * FROM Events WHERE id=${id};`);
    }
 
-   ,async getPostByUserID(id) {
+   ,async getEventByUserID(id) {
       return await dbConnection.getConnection(`
-      SELECT * FROM users INNER JOIN posts ON users.id=posts.id_author_post WHERE id_author_post=${id};`);
+      SELECT * FROM users INNER JOIN Events ON users.id=Events.id_author_Event WHERE id_author_Event=${id};`);
    }
 
-   ,async createPost(title_post, content_post, id_author_post) {
+   ,async createEvent(title_Event, content_Event, id_author_Event) {
       return await dbConnection.getConnection(`
-      INSERT INTO posts (title_post, content_post,id_author_post)
-      VALUES ('${title_post}', '${content_post}','${id_author_post}');`);
+      INSERT INTO Events (title_Event, content_Event,id_author_Event)
+      VALUES ('${title_Event}', '${content_Event}','${id_author_Event}');`);
    }
 
-   ,async updateTitleByID(post_id, title_post) {
+   ,async updateTitleByID(Event_id, title_Event) {
       return await dbConnection.getConnection(`
-      UPDATE posts SET title_post='${title_post}' WHERE id='${post_id}';`);
+      UPDATE Events SET title_Event='${title_Event}' WHERE id='${Event_id}';`);
    }
-   ,async updateContentByID(post_id, content_post) {
+   ,async updateDescriptionByID(Event_id, content_Event) {
       return await dbConnection.getConnection(`
-      UPDATE posts SET content_post='${content_post}' WHERE id='${post_id}';`);
+      UPDATE Events SET content_Event='${content_Event}' WHERE id='${Event_id}';`);
    }
 
-   ,async deletePostByID(post_id) {
+   ,async deleteEventByID(Event_id) {
       return await dbConnection.getConnection(`
-      DELETE FROM posts WHERE id=${post_id};`);
+      DELETE FROM Events WHERE id=${Event_id};`);
    }
 
 }
-module.exports = new postModel();
+module.exports = new EventModel();

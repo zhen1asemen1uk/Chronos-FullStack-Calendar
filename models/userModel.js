@@ -6,7 +6,12 @@ module.exports = {
    }
    ,
    async getUser(login, email) {
-      return await userSchema.find({ login, email });
+      const user = await userSchema.findOne({ login, email });
+
+      if (user?.[0]) {
+         return user[0]
+      }
+      return user
 
    }
    ,
@@ -16,10 +21,7 @@ module.exports = {
    }
    ,
    async loginUser(login) {
-      return await userSchema.findOne({ login: login });
-
-      // return await dbConnection.getConnection(`
-      // SELECT * FROM users WHERE login = "${login}" OR email = "${login}";`);
+      return await userSchema.findOne({ $or: [{ login: login }, { email: email }] });
    }
    ,
    async activateUser_check(link) {
@@ -32,14 +34,10 @@ module.exports = {
    ,
    async updateActivationLink(id, link) {
       return await userSchema.findOneAndUpdate({ _id: id }, { activationLink: link, verify: false });
-      // return await dbConnection.getConnection(`
-      // UPDATE users SET activationLink='${link}' WHERE id='${id}';`);
    }
    ,
    async checkVerifyUser(login) {
-      return await userSchema.findOne({ login });
-      // return await dbConnection.getConnection(`
-      // SELECT verify FROM users WHERE login='${login}' OR email='${login}';`)
+      return await userSchema.findOne({ $or: [{ login: login }, { email: email }] });
    }
    ,
    async getUserByID(user_id) {
@@ -47,12 +45,11 @@ module.exports = {
    }
    ,
    async resetPass_userId(id, pass) {
-      return await userSchema.findOneAndUpdate({ _id: id }, { password:pass});
+      return await userSchema.findOneAndUpdate({ _id: id }, { password: pass });
    }
    ,
    async addUser_ADMIN(login, password, email, avatar, status, verify, activationLink) {
       const user = await new userSchema({ login, password, email, avatar, status, verify, activationLink });
-      console.log(user);
 
       return await userSchema.save();
    }

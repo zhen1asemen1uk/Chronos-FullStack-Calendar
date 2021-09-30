@@ -22,14 +22,11 @@ module.exports = {
          if (password !== password_confirm) {
             return res.send(`Check confirm password`);
          }
+
          //check unique users
-         let check = await userModel.getUser(login, email);
+         const check = await userModel.getUser(login, email);
 
-         if (!check) {
-            return res.send(`Error!`)
-         }
-
-         if (check.length > 0) {
+         if (check !== null) {
             return res.send(`Login or email is already in use!`);
          }
 
@@ -205,7 +202,7 @@ module.exports = {
                //add user data
                await userModel.addUser_ADMIN(login, hashPass, email, avatar, status, verify, activationLink);
                let user = await userModel.getUser(login, email);
-           
+
                //generation token
                const token = tokenService.generationToken(user.id, user.login,
                   user.email, user.status, user.verify, user.avatar);

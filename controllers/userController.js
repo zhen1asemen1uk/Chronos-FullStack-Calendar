@@ -62,7 +62,6 @@ module.exports = {
             if (!activeUser) {
                return res.send(`Uncorrect user!`);
             }
-            console.log(activeUser);
 
          await userModel.activateUser_updateVerify(link);
 
