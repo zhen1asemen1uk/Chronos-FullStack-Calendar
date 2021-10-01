@@ -11,17 +11,25 @@ module.exports = {
    }
 
    , async refreshToken(user_id, refTok) {
-      return await userSchema.findByIdAndUpdate({ _id: user_id }, { refreshToken: refTok });
+      const user = await userSchema.findOne({ _id: user_id });
+      user.tokens.refreshToken = refTok;
+
+      return user.save();
    }
 
    , async save(user_id, refTok) {
-      return await userSchema.findByIdAndUpdate({ _id: user_id }, { refreshToken: refTok });
+      const user = await userSchema.findOne({ _id: user_id });
+      user.tokens.refreshToken = refTok;
+
+      return user.save();
    }
 
    , async delete(refreshToken) {
-      return await userSchema.findOneAndReplace({ refreshToken: refreshToken });//!!!!!!!????????
-      // return await dbConnection.getConnection(`
-      // DELETE FROM tokens WHERE refreshToken='${refreshToken}';`);
+      return await userSchema.findOneAndUpdate({
+         tokens: { refreshToken: refreshToken }
+      }, {
+         $set: { tokens: { refreshToken: "" } }
+      });
    }
 
    , async getTokenAllInfo(refreshToken) {

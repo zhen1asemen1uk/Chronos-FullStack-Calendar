@@ -1,86 +1,77 @@
 const categoryModel = require("../models/categoryModel");
 const commentModel = require("../models/commentModel");
 const likeModel = require("../models/likeModel");
-const postModel = require("../models/postModel");
+const eventModel = require("../models/eventModel");
 
 module.exports = {
  
-   async getAllPosts(req, res) {
+   async getAllEvents(req, res) {
       try {
-         const postsData = await postModel.getAllPosts();
+         const EventsData = await eventModel.getAllEvents();
 
-         for (const key in postsData[0]) {
-            delete postsData[0][key].password
-            delete postsData[0][key].activationLink
-            delete postsData[0][key].verify
-            delete postsData[0][key].status
-            delete postsData[0][key].avatar
-            delete postsData[0][key].email
-        }
-
-         return res.json(postsData[0])
+         return res.json(EventsData)
       } catch (error) {
-         res.send(`Error get all post!`);
+         res.send(`Error get all event!`);
       }
    }
 
-   ,async getPostByID(req, res) {
+   ,async geteventByID(req, res) {
       try {
-         if (req.params.post_id >= 1) {
-            const post_id = req.params.post_id;
-            let post = await postModel.getPostByID(post_id);
+         if (req.params.event_id >= 1) {
+            const event_id = req.params.event_id;
+            let event = await eventModel.geteventByID(event_id);
 
-            return res.json(post[0]);
+            return res.json(event[0]);
          } else {
-            return res.send(`Error post id!`);
+            return res.send(`Error event id!`);
          }
       } catch (error) {
          console.log(error);
-         res.send(`Error get post by id!`);
+         res.send(`Error get event by id!`);
       }
    }
 
-   ,async getPostByUserID(req, res) {
+   ,async geteventByUserID(req, res) {
       try {
          if (req.params.user_id >= 1) {
             const user_id = req.params.user_id;
-            const post = await postModel.getPostByUserID(user_id);
+            const event = await eventModel.geteventByUserID(user_id);
 
-            for (const key in post[0]) {
-               delete post[0][key].password
-               delete post[0][key].activationLink
-               delete post[0][key].verify
-               delete post[0][key].status
-               delete post[0][key].avatar
-               delete post[0][key].email
+            for (const key in event[0]) {
+               delete event[0][key].password
+               delete event[0][key].activationLink
+               delete event[0][key].verify
+               delete event[0][key].status
+               delete event[0][key].avatar
+               delete event[0][key].email
             }
 
-            return res.json(post[0]);
+            return res.json(event[0]);
          } else {
-            return res.send(`Error post id!`);
+            return res.send(`Error event id!`);
          }
       } catch (error) {
          console.log(error);
-         res.send(`Error get post by id!`);
+         res.send(`Error get event by id!`);
       }
    }
 
-   ,async getCommentByPostID(req, res) {
+   ,async getCommentByeventID(req, res) {
       try {
-         const post_id = req.params.post_id;
-         let comments = await commentModel.getCommentByPostID(post_id);
+         const event_id = req.params.event_id;
+         let comments = await commentModel.getCommentByeventID(event_id);
 
          return res.json(comments[0]);
       } catch (error) {
          console.log(error);
-         res.send(`Error get comment by post id!`);
+         res.send(`Error get comment by event id!`);
       }
    }
 
    ,async createComment(req, res) {
       try {
          if (req.body.content) {
-            const post_id = req.params.post_id;
+            const event_id = req.params.event_id;
             const content = req.body.content;
             let autor = 0;
 
@@ -88,7 +79,7 @@ module.exports = {
                autor = req.user.id;
             }
 
-            const createComment = await commentModel.createComment(post_id, autor, content);
+            const createComment = await commentModel.createComment(event_id, autor, content);
             return res.send('Comment add!')
          } else {
             return res.send('Comment must be filled!');
@@ -100,66 +91,66 @@ module.exports = {
       }
    }
 
-   ,async getCategoriesByPostID(req, res) {
+   ,async getCategoriesByeventID(req, res) {
       try {
-         const post_id = req.params.post_id;
-         let categories = await categoryModel.getCategoriesByPostID(post_id);
+         const event_id = req.params.event_id;
+         let categories = await categoryModel.getCategoriesByeventID(event_id);
 
          return res.json(categories[0]);
       } catch (error) {
          console.log(error);
-         res.send(`Error get category by post id!`);
+         res.send(`Error get category by event id!`);
       }
    }
-   ,async getAllLikeByPostID(req, res) {
+   ,async getAllLikeByeventID(req, res) {
       try {
-         if (req.params.post_id >= 1) {
-            const post_id = req.params.post_id;
-            let likes = await likeModel.getAllLikeByPostID(post_id);
+         if (req.params.event_id >= 1) {
+            const event_id = req.params.event_id;
+            let likes = await likeModel.getAllLikeByeventID(event_id);
 
             return res.json(likes[0]);
          } else {
-            return res.send(`Error post id!`);
+            return res.send(`Error event id!`);
          }
       } catch (error) {
          console.log(error);
-         res.send(`Error get all like by post id!`);
+         res.send(`Error get all like by event id!`);
       }
    }
 
-   ,async createPost(req, res) {
+   ,async createevent(req, res) {
       try {
          if (req.body.title && req.body.content && req.body.categories) {
             const { title, content, categories } = req.body;
 
-            let id_author_post = 0;
+            let id_author_event = 0;
             if (req.user?.id) {
-               id_author_post = req.user.id;
+               id_author_event = req.user.id;
             }
 
-            const createPost = await postModel.createPost(title, content, id_author_post);
-            const post_id = createPost[0].insertId;
+            const createevent = await eventModel.createevent(title, content, id_author_event);
+            const event_id = createevent[0].insertId;
 
             let category = categories.split(` `);
 
             for (let i = 0; i < category.length; i++) {
-               const createCategory = await categoryModel.createCategory(post_id, id_author_post, category[i]);
+               const createCategory = await categoryModel.createCategory(event_id, id_author_event, category[i]);
             }
-            const post = await postModel.getPostByID(post_id);
+            const event = await eventModel.geteventByID(event_id);
 
-            return res.json(post[0][0]);
+            return res.json(event[0][0]);
          } else {
             return res.send('Title, content and category must be filled!');
          }
       } catch (error) {
          console.log(error);
-         res.send(`Error create Post`);
+         res.send(`Error create event`);
       }
    }
 
    ,async addLike(req, res) {
       try {
-         const post_id = req.params.post_id;
+         const event_id = req.params.event_id;
 
          let like_login = `people`;
 
@@ -168,13 +159,13 @@ module.exports = {
          }
 
          if (like_login !== `people`) {
-            const checkLikeForPost = await likeModel.checkLikeForPost(post_id, like_login);
+            const checkLikeForevent = await likeModel.checkLikeForevent(event_id, like_login);
 
-            if (checkLikeForPost[0].length > 0) {
+            if (checkLikeForevent[0].length > 0) {
                return res.send('I know you Liked!');;
             }
          }
-         const addLike = await likeModel.addLike(post_id, like_login);
+         const addLike = await likeModel.addLike(event_id, like_login);
          return res.send('Liked!');
 
       } catch (error) {
@@ -184,53 +175,53 @@ module.exports = {
 
    }
 
-   ,async updatePostByID(req, res) {
+   ,async updateeventByID(req, res) {
       try {
-         if (req.params.post_id >= 1) {
-            const postAutorId = await postModel.getPostByID(req.params.post_id);
-            const post_id = req.params.post_id;
+         if (req.params.event_id >= 1) {
+            const eventAutorId = await eventModel.geteventByID(req.params.event_id);
+            const event_id = req.params.event_id;
             const { title, content, category } = req.body;
 
-            if (req.user.id == postAutorId[0][0].id_author_post) {
+            if (req.user.id == eventAutorId[0][0].id_author_event) {
 
                if (title) {
-                  const updateTitleByID = await postModel.updateTitleByID(post_id, title);
+                  const updateTitleByID = await eventModel.updateTitleByID(event_id, title);
                }
                if (content) {
-                  const updateContentByID = await postModel.updateContentByID(post_id, content);
+                  const updateContentByID = await eventModel.updateContentByID(event_id, content);
                }
                if (category) {
-                  const updateCategoryByID = await categoryModel.updateCategoryByID(post_id, category);
+                  const updateCategoryByID = await categoryModel.updateCategoryByID(event_id, category);
                }
 
-               return res.send(`Post update!`);
+               return res.send(`event update!`);
             } else {
                return res.send(`Access is closed !`);
             }
          } else {
-            return res.send(`Error post id!`);
+            return res.send(`Error event id!`);
          }
       } catch (error) {
          console.log(error);
-         res.send(`Error update post!`);
+         res.send(`Error update event!`);
       }
    }
 
-   ,async deletePostByID(req, res) {
+   ,async deleteeventByID(req, res) {
       try {
-         if (req.params.post_id >= 1) {
+         if (req.params.event_id >= 1) {
             const like_login = req.user.login;
-            const post_id = req.params.post_id;
-            const deletPost = await postModel.deletePostByID(post_id);
-            const deleteLikeFormPost = await likeModel.deleteLikeFromPostByID(post_id, like_login);
-            const deleteCommentByPostID = await commentModel.deleteCommentByPostID(post_id);
-            // const deleteLikeFromComment = await likeModel.deleteLikeFromPostByID(post_id, like_login);//???
-            const deleteCategory = await categoryModel.deleteCategoryByPostID(post_id);
+            const event_id = req.params.event_id;
+            const deletevent = await eventModel.deleteeventByID(event_id);
+            const deleteLikeFormevent = await likeModel.deleteLikeFromeventByID(event_id, like_login);
+            const deleteCommentByeventID = await commentModel.deleteCommentByeventID(event_id);
+            // const deleteLikeFromComment = await likeModel.deleteLikeFromeventByID(event_id, like_login);//???
+            const deleteCategory = await categoryModel.deleteCategoryByeventID(event_id);
 
 
             res.send(`Success deleted!`)
          } else {
-            return res.send(`Error post id!`);
+            return res.send(`Error event id!`);
          }
       } catch (error) {
          console.log(error);
@@ -238,16 +229,16 @@ module.exports = {
       }
    }
 
-   ,async deleteLikeFromPostByID(req, res) {
+   ,async deleteLikeFromeventByID(req, res) {
       try {
-         if (req.params.post_id >= 1) {
-            const post_id = req.params.post_id;
+         if (req.params.event_id >= 1) {
+            const event_id = req.params.event_id;
             const like_login = req.user.login;
-            const deleteLikeFromPostByID = await likeModel.deleteLikeFromPostByID(post_id, like_login);
+            const deleteLikeFromeventByID = await likeModel.deleteLikeFromeventByID(event_id, like_login);
 
             return res.send(`Unliked`);
          } else {
-            return res.send(`Error post id!`);
+            return res.send(`Error event id!`);
          }
       } catch (error) {
          console.log(error);
@@ -255,4 +246,4 @@ module.exports = {
       }
    }
 }
-module.exports = new postController();
+module.exports = new eventController();

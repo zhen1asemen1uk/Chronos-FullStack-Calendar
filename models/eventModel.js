@@ -3,7 +3,9 @@ const userSchema = require("./schema/userSchema");
 
 module.exports ={
    async getAllEvents() {
-      // return await userSchema.find();
+       let a =await userSchema.find({events:[]},{password:0,activationLink:0,verify:0,status:0,avatar:0,email:0});
+       console.log(a);
+      return a
       return await dbConnection.getConnection(`
       SELECT * FROM users INNER JOIN Events ON users.id=Events.id_author_Event ORDER BY 6 DESC;`);
    }

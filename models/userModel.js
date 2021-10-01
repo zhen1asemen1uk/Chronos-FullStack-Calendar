@@ -21,7 +21,7 @@ module.exports = {
    }
    ,
    async loginUser(login) {
-      return await userSchema.findOne({ $or: [{ login: login }, { email: email }] });
+      return await userSchema.findOne({ $or: [{ login: login }, { email: login }] });
    }
    ,
    async activateUser_check(link) {
@@ -37,7 +37,7 @@ module.exports = {
    }
    ,
    async checkVerifyUser(login) {
-      return await userSchema.findOne({ $or: [{ login: login }, { email: email }] });
+      return await userSchema.findOne({ $or: [{ login: login }, { email: login }] });
    }
    ,
    async getUserByID(user_id) {

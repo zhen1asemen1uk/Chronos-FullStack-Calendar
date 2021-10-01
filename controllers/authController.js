@@ -43,7 +43,7 @@ module.exports = {
          const user = await userModel.getUser(login, email);
 
          //generation token
-         const token = tokenService.generationToken(user.id, user.login,
+         const token = await tokenService.generationToken(user.id, user.login,
             user.email, user.status, user.verify, user.avatar);
 
          const { accessToken, refreshToken } = token;
@@ -77,12 +77,10 @@ module.exports = {
          //generation token
          const token = tokenService.generationToken(user.id, user.login,
             user.email, user.status, user.verify, user.avatar);
-
          const { accessToken, refreshToken } = token;
 
          //save token to databases
          await tokenService.saveToken(user.id, refreshToken);
-
          //save token to cookies
          res.cookie(`refreshToken`, refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true }); //when `https` add secure!
 
