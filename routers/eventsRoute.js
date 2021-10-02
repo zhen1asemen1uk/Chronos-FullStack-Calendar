@@ -1,16 +1,15 @@
-// const express = require('express');
-// const router = express.Router();
+const express = require('express');
+const eventController = require('../controllers/eventController');
+const router = express.Router();
 
-// const authMiddleware = require('./middleware/authMiddleware');
+const authMiddleware = require('./middleware/authMiddleware');
 
-// router.get(`/`, getAllEvents);
+router.get(`/`, eventController.getAllEvents);
 
-// router.post(`/`, authMiddleware, );
+router.post(`/`, authMiddleware, eventController.createEvent);
 
-// router.patch(`/:event_id`, authMiddleware,);
+router.patch(`/:event_id`, authMiddleware, eventController.updatEventByID);
 
-// router.delete(`/:event_id`, authMiddleware,);
+router.delete(`/:event_id`, authMiddleware, eventController.deletEventByID);
 
-
-
-// module.exports = router;
+module.exports = router;

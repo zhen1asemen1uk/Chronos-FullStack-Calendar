@@ -7,7 +7,6 @@ module.exports = async (req, res, next) => {
       if (!authorization) {
          return res.status(403).json({ message: `Error authorization` });
       }
-
       const accessToken = authorization.split(` `)[1];
 
       if (!accessToken) {
