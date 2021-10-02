@@ -1,11 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CalendarMonth from './CalendarMonth';
 import ControlBarConteiner from './ControlBar/ControlBarConteiner';
 import WeekBar from './WeekBar/WeekBar';
 
 const CalendarMonthConteiner = () => {
+   const dispath = useDispatch();
+   dispath()
    const today = useSelector(state => state.monthStore.today);
    const events = useSelector(state => state.monthStore.events);
    console.log(events);
