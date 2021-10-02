@@ -4,14 +4,14 @@ import thunk from "redux-thunk";
 
 import { monthReducer } from "./monthReducer/monthReducer";
 import { eventReducer } from "./eventReducer/eventReducer";
-import { userReducer } from "./userReducer/userReducer";
+import { authReducer } from "./authReducer/authReducer";
 
 
 
 const rootReducer = combineReducers({
    monthStore: monthReducer,
    eventStore: eventReducer,
-   userStore: userReducer
+   authStore: authReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

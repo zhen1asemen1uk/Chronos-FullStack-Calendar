@@ -60,17 +60,13 @@ export const eventReducer = (state = initialState, action) => {
    }
 }
 
-export const getAllevents_event = (payload) => ({ type: getAllEvents_Type, payload });
-export const getEventByID_event = (payload) => ({ type: getEventByID_Type, payload });
-export const getEventByUserID_event = (payload) => ({ type: getEventByUserID_Type, payload });E
+export const getAllevents_Event = (payload) => ({ type: getAllEvents_Type, payload });
+export const getEventByID_Event = (payload) => ({ type: getEventByID_Type, payload });
+export const getEventByUserID_Event = (payload) => ({ type: getEventByUserID_Type, payload });E
 
-
-
-export const addEvent_event = (payload) => ({ type: addEvent_Type, payload });
-
-export const updateEvent_event = (payload) => ({ type: updateEvent_Type, payload });
-export const deleteEvent_event = (payload) => ({ type: deleteEvent_Type, payload });
-
-export const search_event = (payload) => ({ type: search_Type, payload });
+export const addEvent_Event = (payload) => ({ type: addEvent_Type, payload });
+export const updateEvent_Event = (payload) => ({ type: updateEvent_Type, payload });
+export const deleteEvent_Event = (payload) => ({ type: deleteEvent_Type, payload });
+export const search_Event = (payload) => ({ type: search_Type, payload });
 
 
