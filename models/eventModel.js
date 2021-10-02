@@ -17,10 +17,10 @@ module.exports = {
       });
    }
 
-   // , async getEventByUserID(id) {
-   //    return await dbConnection.getConnection(`
-   //    SELECT * FROM users INNER JOIN Events ON users.id=Events.id_author_Event WHERE id_author_Event=${id};`);
-   // }
+   , async getEventByUserID(user_id) {
+      const events = await userSchema.find({ _id: user_id }, { events: 1, _id: 0 });
+      return events[0].events
+   }
 
    , async createEvent(title_Event, content_Event, date, id_author_Event) {
       await userSchema.findByIdAndUpdate({ _id: id_author_Event }, {

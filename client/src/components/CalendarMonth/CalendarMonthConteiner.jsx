@@ -7,8 +7,9 @@ import WeekBar from './WeekBar/WeekBar';
 
 const CalendarMonthConteiner = () => {
    const today = useSelector(state => state.monthStore.today);
-
-   let weekStartDay = today.clone().startOf('month').startOf('week');
+   const events = useSelector(state => state.monthStore.events);
+   console.log(events);
+   const weekStartDay = today.clone().startOf('month').startOf('week');
    let day = weekStartDay.clone().subtract(1, 'day');
 
    const arrDays = [...Array(42)].map(() => {

@@ -6,6 +6,8 @@ const authMiddleware = require('./middleware/authMiddleware');
 
 router.get(`/`, eventController.getAllEvents);
 
+router.get(`/:user_id`, eventController.getEventByUserID);
+
 router.post(`/`, authMiddleware, eventController.createEvent);
 
 router.patch(`/:event_id`, authMiddleware, eventController.updatEventByID);

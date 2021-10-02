@@ -30,23 +30,11 @@ module.exports = {
 
    , async getEventByUserID(req, res) {
       try {
-         if (req.params.user_id >= 1) {
-            const user_id = req.params.user_id;
-            const event = await eventModel.getEventByUserID(user_id);
+         const user_id = req.params.user_id;
+         const event = await eventModel.getEventByUserID(user_id);
 
-            for (const key in event[0]) {
-               delete event[0][key].password
-               delete event[0][key].activationLink
-               delete event[0][key].verify
-               delete event[0][key].status
-               delete event[0][key].avatar
-               delete event[0][key].email
-            }
+         return res.json(event);
 
-            return res.json(event[0]);
-         } else {
-            return res.send(`Error event id!`);
-         }
       } catch (error) {
          console.log(error);
          res.send(`Error get event by id!`);
