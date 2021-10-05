@@ -57,12 +57,12 @@ module.exports = {
       try {
          if (req.body.title && req.body.content && req.body.date) {
             const { title, content, date } = req.body;
-            let id_author_event = req.user?.id;
+            let id_author_event = req.user.id;
 
-            let dateFormat = moment(date, "DD MM YYYY").format()
+            let dateFormat = moment(date, "DD MM YYYY").format("X")
 
             const createEvent = await eventModel.createEvent(title, content, dateFormat, id_author_event);
-            console.log(createEvent);
+
             let lastEvent = createEvent.events.pop();
 
             return res.json(lastEvent);

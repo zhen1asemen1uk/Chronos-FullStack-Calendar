@@ -13,7 +13,7 @@ import stl from './ControlBar.module.css'
 
 const ControlBarConteiner = () => {
    const dispatch = useDispatch();
-   const today = useSelector(state => state.monthStore.today);
+   const today = useSelector(state => state.monthState.today);
 
    const prevHandler = () => {
       dispatch(prevMonth(today.clone().subtract(1, 'month')));

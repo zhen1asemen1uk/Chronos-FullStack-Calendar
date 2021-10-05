@@ -29,20 +29,10 @@ app.use((req, res) => {
 
 async function start() {
    try {
-      const dbName = (`calendar(chronos)`);
+      // const dbName = (`calendar(chronos)`);
       const url = `mongodb+srv://${DB_LOGIN}:${DB_PASSWORD}@cluster0.gluco.mongodb.net/`;
 
       await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
-      // const client = new mongoose(url, { useNewUrlParser: true, useUnifiedTopology: true });
-
-      // client.connect(err => {
-      //    const collection = client.db(dbName).collection(`users`);
-
-      //    collection.cre
-
-      //    console.log(collection);
-      //    client.close();
-      // });
 
       app.listen(PORT, () => {
          console.log(`Server started...\n On => ${HOST}${PORT}`);

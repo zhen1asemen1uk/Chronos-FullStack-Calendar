@@ -1,22 +1,23 @@
 import api from '.'
+
 import { isLoading_Auth } from '../reducers/authReducer/authReducer';
 import {
    addEvent_Event,
    deleteEvent_Event,
    getAllEvents_Event,
 
-   search_Event,
-   updateEvent_Event,
-   getEventByID_Event,
    getEventByUserID_Event,
+   getEventByID_Event,
+   updateEvent_Event,
+   search_Event
 } from '../reducers/eventReducer/eventReducer';
 
 export const eventAPI = {
-   getAllEvents(page, size) {
+   getAllEvents() {
       return async (dispatch) => {
          try {
             dispatch(isLoading_Auth(true));
-            const dataEvents = await api.get(`/api/Events`);
+            const dataEvents = await api.get(`/api/event`);
 
             return dispatch(getAllEvents_Event(dataEvents.data));
          } catch (error) {
@@ -31,7 +32,7 @@ export const eventAPI = {
       return async (dispatch) => {
          try {
             dispatch(isLoading_Auth(true));
-            const dataEvents = await api.get(`/api/Events/${id}`)
+            const dataEvents = await api.get(`/api/event/${id}`)
 
             return dispatch(getEventByID_Event(dataEvents.data));
          } catch (error) {
@@ -45,7 +46,7 @@ export const eventAPI = {
       return async (dispatch) => {
          try {
             dispatch(isLoading_Auth(true));
-            const dataEvents = await api.get(`/api/Events/${id}/user`)
+            const dataEvents = await api.get(`/api/event/${id}/user`)
 
             return dispatch(getEventByUserID_Event(dataEvents.data));
          } catch (error) {
@@ -58,15 +59,16 @@ export const eventAPI = {
    },
 
 
-   addEvent(title, content, categories) {
+   addEvent(title, content, date) {
       return async (dispatch) => {
          try {
             dispatch(isLoading_Auth(true));
-            const newEvent = await api.Event(`/api/Events/`, {
+            const newEvent = await api.post(`/api/event/`, {
                title,
                content,
-               categories
+               date
             });
+
             return dispatch(addEvent_Event(newEvent.data));
          } catch (error) {
             console.log(error);
@@ -77,11 +79,11 @@ export const eventAPI = {
    },
 
 
-   updateEvent(id, title, content, categories) {
+   updateEvent(id, title, content, date) {
       return async (dispatch) => {
          try {
             dispatch(isLoading_Auth(true));
-            const dataEvents = await api.patch(`/api/Events/${id}`, { title: title, content: content, categories: categories })
+            const dataEvents = await api.patch(`/api/event/${id}`, { title: title, content: content, date: date })
 
             return dispatch(updateEvent_Event(dataEvents.data));
          } catch (error) {
@@ -96,7 +98,7 @@ export const eventAPI = {
       return async (dispatch) => {
          try {
             dispatch(isLoading_Auth(true));
-            const deletedEvent = await api.delete(`/api/Events/${id}`)
+            const deletedEvent = await api.delete(`/api/event/${id}`)
 
             return dispatch(deleteEvent_Event(deletedEvent.data));
          } catch (error) {

@@ -60,9 +60,9 @@ export const eventReducer = (state = initialState, action) => {
    }
 }
 
-export const getAllevents_Event = (payload) => ({ type: getAllEvents_Type, payload });
+export const getAllEvents_Event = (payload) => ({ type: getAllEvents_Type, payload });
 export const getEventByID_Event = (payload) => ({ type: getEventByID_Type, payload });
-export const getEventByUserID_Event = (payload) => ({ type: getEventByUserID_Type, payload });E
+export const getEventByUserID_Event = (payload) => ({ type: getEventByUserID_Type, payload });
 
 export const addEvent_Event = (payload) => ({ type: addEvent_Type, payload });
 export const updateEvent_Event = (payload) => ({ type: updateEvent_Type, payload });

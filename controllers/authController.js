@@ -138,7 +138,7 @@ module.exports = {
          let token = await tokenController.getTokenByID(resolt.id);
 
          //check token
-         if (!token[0].length > 0) {
+         if (!token.length > 0) {
             //generation token
             const tokenGen = tokenService.generationToken(resolt.id, resolt.login,
                resolt.email, resolt.status, resolt.verify, resolt.avatar);

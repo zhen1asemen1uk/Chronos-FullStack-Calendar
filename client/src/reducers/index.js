@@ -9,9 +9,9 @@ import { authReducer } from "./authReducer/authReducer";
 
 
 const rootReducer = combineReducers({
-   monthStore: monthReducer,
-   eventStore: eventReducer,
-   authStore: authReducer
+   monthState: monthReducer,
+   eventState: eventReducer,
+   authState: authReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
