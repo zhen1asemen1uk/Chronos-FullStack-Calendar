@@ -6,7 +6,7 @@ import CalendarMonth from './CalendarMonth';
 
 const CalendarMonthConteiner = () => {
    const dispatch = useDispatch();
-   
+
    const user = useSelector(state => state.authState.user);
    const today = useSelector(state => state.monthState.today);
    const eventDataForMonth = useSelector(state => state.eventState.eventDataForMonth);
@@ -24,8 +24,10 @@ const CalendarMonthConteiner = () => {
    let day = weekStartDay.clone().subtract(1, 'day');
 
    useEffect(() => {
-      getEventsInMonth(user.id, monthStartDay, monthEndDay);
-   }, [today])
+      if (user.id !== undefined) {
+         getEventsInMonth(user.id, monthStartDay, monthEndDay);
+      }
+   }, [today, user.id, getEventsInMonth])
 
    const arrDays = [...Array(42)].map(() => {
       return day.add(1, 'day').clone()

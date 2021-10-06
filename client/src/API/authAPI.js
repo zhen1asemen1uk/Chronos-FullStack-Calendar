@@ -5,6 +5,7 @@ import {
    isLoading_Auth, login_Auth, logout_Auth,
    password_reset_Auth, register_Auth
 } from '../reducers/authReducer/authReducer';
+import { getEventByUserIDAndTime_Event } from '../reducers/eventReducer/eventReducer';
 
 const API_URL = process.env.REACT_APP_HOST;
 
@@ -105,7 +106,7 @@ export const authAPI = {
          try {
             dispatch(isLoading_Auth(true));
             const dataLogout = await api.post(`/api/auth/logout`);
-
+            dispatch(getEventByUserIDAndTime_Event([]));
             return dispatch(logout_Auth(dataLogout))
          } catch (error) {
             console.log(`Error logout ${error}`);

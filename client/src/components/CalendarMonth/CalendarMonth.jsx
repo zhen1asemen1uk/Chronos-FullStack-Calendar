@@ -14,6 +14,7 @@ const CalendarMonth = (props) => {
          arrDays.map((numDay) => {
             const startDay = numDay.clone().startOf("day").format('X');
             const endDay = numDay.clone().endOf("day").format('X');
+
             const classWeek = () => {
                if (numDay.day() === 0 || numDay.day() === 6) {
                   return `${stl.week}`
@@ -32,10 +33,13 @@ const CalendarMonth = (props) => {
                }
             }
             const eventsOfDay = () => {
-               return eventDataForMonth
-                  .filter(e => e.date >= startDay && e.date <= endDay)
-                  .map(e => <li key={e.date} > {e.title}</li>)
+               if (eventDataForMonth &&
+                  typeof eventDataForMonth == "object") {
 
+                  return eventDataForMonth
+                     .filter(e => e.date >= startDay && e.date <= endDay)
+                     .map(e => <li key={e.date} > {e.title}</li>)
+               }
             }
 
             return (
