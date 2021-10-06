@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 
-import Modal from '../../Modal/Modal';
 import ResetPasswordConteiner from '../ResetPassword/ResetPasswordConteiner';
-
 import stl from './Login.module.css'
 
 const Login = (props) => {
    const { sendLoginData, authState,
-      modalActive, setModalActive,
-      children, setChildren } = props;
+      isModalSet, } = props;
 
    const [login, setLogin] = useState("");
    const [password, setPassword] = useState("");
@@ -17,7 +14,6 @@ const Login = (props) => {
    return (
       <>
          <h1>Login 🚪</h1>
-         <Modal active={modalActive} setActive={setModalActive} children={children} />
 
          <div className={stl.wrappFormLog}>
             <input type="text" name="login" id={stl.login}
@@ -36,18 +32,18 @@ const Login = (props) => {
 
             <div className={stl.resetPass}>
                <button className={stl.btn} onClick={() => {
-                  setChildren(<ResetPasswordConteiner/>)
+                  isModalSet(true, <ResetPasswordConteiner />)
                }}>reset password?</button>
+            </div>
+
+            <button onClick={() => {
+               sendLoginData(login, password)
+            }} className={stl.btnSend}>Login</button>
+
+            {typeof authState.user == 'string' ?
+               <div className={stl.notification}>{authState.user}</div> :
+               <></>}
          </div>
-
-         <button onClick={() => {
-            sendLoginData(login, password)
-         }} className={stl.btnSend}>Login</button>
-
-         {typeof authState.user == 'string' ?
-            <div className={stl.notification}>{authState.user}</div> :
-            <></>}
-      </div>
       </>
    )
 };

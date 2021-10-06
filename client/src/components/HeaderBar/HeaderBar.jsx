@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import AddEventConteiner from '../Auth/Event/AddEventConteiner';
+import AddEventConteiner from '../Event/AddEventConteiner';
 import LoginConteiner from '../Auth/Login/LoginConteiner';
 import RegisterConteiner from '../Auth/Register/RegisterConteiner';
 
@@ -10,21 +10,20 @@ import stl from './HeaderBar.module.css';
 
 const HeaderBar = (props) => {
    const API_URL = process.env.REACT_APP_HOST;
-   const { modalActive, setModalActive,
+   const { isModal, isModalSet,
       search, setSearch,
-      children, setChildren,
+      modalChildren,
       isAuth, logout, user } = props;
 
 
    return (
       <div className={stl.wrapp}>
 
-         <Modal active={modalActive} setActive={setModalActive} children={children} />
+         <Modal isModal={isModal} isModalSet={isModalSet} children={modalChildren} />
 
          <div className={stl.oneBTN}>
             <button className={stl.btn} onClick={() => {
-               setModalActive(true)
-               setChildren(<AddEventConteiner />)
+               isModalSet(true, <AddEventConteiner />)
             }}>
                +
             </button>
@@ -60,12 +59,10 @@ const HeaderBar = (props) => {
 
             <div className={`${stl.auth} ${stl.oneBTN}`}>
                <button className={stl.btn} onClick={() => {
-                  setModalActive(true)
-                  setChildren(<RegisterConteiner />)
+                  isModalSet(true, <RegisterConteiner />)
                }}>register</button>
                <button className={stl.btn} onClick={() => {
-                  setModalActive(true)
-                  setChildren(<LoginConteiner />)
+                  isModalSet(true, <LoginConteiner />)
                }}>login</button>
 
             </div>

@@ -21,6 +21,12 @@ module.exports = {
       const events = await userSchema.find({ _id: user_id }, { events: 1, _id: 0 });
       return events[0].events
    }
+   , async getEventByUserIDAndTime(user_id, gte, lte) {
+      const events = await userSchema.find({ _id: user_id }, { _id: 0, events: 1 });
+      const elems = events[0].events.filter((e) => { if (e.date >= gte && e.date <= lte) return e })
+
+      return elems
+   }
 
    , async createEvent(title_Event, content_Event, date, id_author_Event) {
       await userSchema.findByIdAndUpdate({ _id: id_author_Event }, {

@@ -1,14 +1,13 @@
 const eventModel = require("../models/eventModel");
 const moment = require('moment');
-const mongoose = require('mongoose');
 
 module.exports = {
 
    async getAllEvents(req, res) {
       try {
-         const EventsData = await eventModel.getAllEvents();
+         const eventsData = await eventModel.getAllEvents();
 
-         return res.json(EventsData)
+         return res.json(eventsData[0])
       } catch (error) {
          res.send(`Error get all event!`);
       }
@@ -22,6 +21,19 @@ module.exports = {
          console.log(event);
 
          return res.json(event);
+      } catch (error) {
+         console.log(error);
+         res.send(`Error get event by id!`);
+      }
+   }
+   , async getEventByUserIDAndTime(req, res) {
+      try {
+         const user_id = req.params.user_id;
+         const gte = req.params.gte;
+         const lte = req.params.lte;
+         const events = await eventModel.getEventByUserIDAndTime(user_id, gte, lte);
+         
+         return res.json(events);
       } catch (error) {
          console.log(error);
          res.send(`Error get event by id!`);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 
-import { eventAPI } from '../../../API/eventAPI';
+import { eventAPI } from '../../API/eventAPI';
 import AddEvent from './AddEvent';
 
 const AddEventConteiner = () => {
@@ -12,14 +12,7 @@ const AddEventConteiner = () => {
    const [date, setDate] = useState("");
 
    const addEvent = (title, content, date) => {
-      if (date.match(/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/)) {
-         dispatch(eventAPI.addEvent(title, content, date))
-         console.log(1);
-      } else {
-         let error = 'Error format date.\nTrue format:DD.MM.YYYY';
-         console.log(2);
-      }
-
+      dispatch(eventAPI.addEvent(title, content, date))
    }
 
    return (<AddEvent

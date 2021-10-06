@@ -65,7 +65,7 @@ module.exports = {
 
          await userModel.activateUser_updateVerify(link);
 
-         res.redirect(`${CLIENT_URL}/login`)
+         res.redirect(`${CLIENT_URL}/`)
       } catch (error) {
          console.log(error);
          res.send(`Error activate user!`);

@@ -54,7 +54,6 @@ class TokenService {
    async saveToken(id, refToken) {
       try {
          const tokenData = await tokenController.getTokenByID(id);
-         console.log(tokenData.length >0);
 
          if (tokenData.length > 0) {
             return await tokenController.refreshToken(id, refToken);

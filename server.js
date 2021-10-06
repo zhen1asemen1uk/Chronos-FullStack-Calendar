@@ -29,8 +29,8 @@ app.use((req, res) => {
 
 async function start() {
    try {
-      // const dbName = (`calendar(chronos)`);
-      const url = `mongodb+srv://${DB_LOGIN}:${DB_PASSWORD}@cluster0.gluco.mongodb.net/`;
+      const dbName = (`calendar(chronos)`);
+      const url = `mongodb+srv://${DB_LOGIN}:${DB_PASSWORD}@cluster0.gluco.mongodb.net/${dbName}`;
 
       await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 

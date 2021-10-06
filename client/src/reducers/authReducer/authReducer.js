@@ -6,21 +6,29 @@ import {
    password_reset_Type,
    password_reset_link_Type,
    logout_Type,
-   isLoading_Type
+   isLoading_Type,
+   isModal_Type,
+   modalChildren_Type
 } from "./types";
 
 export const initialState = {
    user: {},
    passwordReset: {},
    isAuth: false,
-   isLoading: false
+   isLoading: false,
+   isModal: false,
+   modalChildren: ''
 }
 export const authReducer = (state = initialState, action) => {
    switch (action.type) {
 
       case register_Type:
-         console.log(action.payload );
-         return { ...state, user: action.payload }
+         console.log(action.payload.data);
+         if (typeof action.payload.data == "object") {
+            return { ...state, user: action.payload.data.user, isModal: false }
+         }
+         return { ...state, user: action.payload.data }
+
 
       case login_Type:
          if (typeof action.payload.data == "object") {
@@ -30,7 +38,7 @@ export const authReducer = (state = initialState, action) => {
             localStorage.setItem('userData', obj);
 
             state.isAuth = true;
-            return { ...state, user: action.payload.data.user }
+            return { ...state, user: action.payload.data.user, isModal: false }
          }
          return { ...state, user: action.payload.data }
 
@@ -60,6 +68,12 @@ export const authReducer = (state = initialState, action) => {
       case isLoading_Type:
          return { ...state, isLoading: action.payload }
 
+      case isModal_Type:
+         return { ...state, isModal: action.payload }
+         
+      case modalChildren_Type:
+         return { ...state, modalChildren: action.payload }
+
       default:
          return state
    }
@@ -72,3 +86,5 @@ export const password_reset_Auth = (payload) => ({ type: password_reset_Type, pa
 export const password_reset_link_Auth = (payload) => ({ type: password_reset_link_Type, payload });
 export const logout_Auth = (payload) => ({ type: logout_Type, payload });
 export const isLoading_Auth = (payload) => ({ type: isLoading_Type, payload });
+export const isModal_Auth = (payload) => ({ type: isModal_Type, payload });
+export const modalChildren_Auth = (payload) => ({ type: modalChildren_Type, payload });

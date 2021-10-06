@@ -12,7 +12,7 @@ const user = new Schema({
    events: [{
       title: { type: String, required: true },
       desc: { type: String },
-      date: { type: String, required:true }
+      date: { type: Number, required:true }
    }],
    tokens: {
       refreshToken: { type: String },

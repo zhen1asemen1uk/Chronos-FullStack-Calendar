@@ -1,6 +1,6 @@
 import api from '.'
 
-import { isLoading_Auth } from '../reducers/authReducer/authReducer';
+import { isLoading_Auth, isModal_Auth } from '../reducers/authReducer/authReducer';
 import {
    addEvent_Event,
    deleteEvent_Event,
@@ -73,6 +73,7 @@ export const eventAPI = {
          } catch (error) {
             console.log(error);
          } finally {
+            dispatch(isModal_Auth(false))
             dispatch(isLoading_Auth(false));
          }
       }
