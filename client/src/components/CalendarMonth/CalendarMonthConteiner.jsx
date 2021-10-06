@@ -27,7 +27,7 @@ const CalendarMonthConteiner = () => {
       if (user.id !== undefined) {
          getEventsInMonth(user.id, monthStartDay, monthEndDay);
       }
-   }, [today, user.id, getEventsInMonth])
+   }, [today, user.id])
 
    const arrDays = [...Array(42)].map(() => {
       return day.add(1, 'day').clone()
