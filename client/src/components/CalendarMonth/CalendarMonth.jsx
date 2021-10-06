@@ -1,11 +1,12 @@
 import React from 'react';
+import AddEventConteiner from '../Event/AddEventConteiner';
 
 import stl from './CalendarMonth.module.css'
 import ControlBarConteiner from './ControlBar/ControlBarConteiner';
 import WeekBar from './WeekBar/WeekBar';
 
 const CalendarMonth = (props) => {
-   const { today, arrDays, eventDataForMonth } = props;
+   const { today, arrDays, eventDataForMonth, isModalSet } = props;
 
    return (<>
       <ControlBarConteiner />
@@ -37,13 +38,14 @@ const CalendarMonth = (props) => {
                   typeof eventDataForMonth == "object") {
 
                   return eventDataForMonth
-                     .filter(e => e.date >= startDay && e.date <= endDay)
-                     .map(e => <li key={e.date} > {e.title}</li>)
+                     .filter((e, i) => e.date >= startDay && e.date <= endDay)
+                     .map((e, i) => <li key={e.date + i} > {e.title}</li>)
                }
             }
 
             return (
-               <div key={numDay.format('DDMMYYYY')} className={classWeek()}>
+               <div key={numDay.format('DDMMYYYY')} className={classWeek()} 
+                  onDoubleClick={() => { isModalSet(true,<AddEventConteiner/>)}}>
 
                   <div className={classNum()}>
                      <div>{numDay.format('D')}</div>

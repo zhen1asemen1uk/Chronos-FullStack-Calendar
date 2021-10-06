@@ -12,7 +12,7 @@
    background-color: #2b282c;
    padding: 5px;
    min-width: 100px;
-   min-height: 60px;
+   min-height: 70px;
 }
 
 .week {
@@ -40,6 +40,7 @@
    border-radius: 20px;
    font-weight: bold;
    font-size: 12px;
+   cursor: pointer;
 }
 
 .numToday {
@@ -50,16 +51,20 @@
 
 .numAnotherMonth {
    opacity: 0.35;
+   cursor:default;
 }
 
 .events {
    display: flex;
    flex-direction: column;
-   justify-content: center;
+   justify-content: flex-start;
    align-items: flex-start;
-   font-weight: bold; 
+   font-weight: bold;
    border-radius: 5px;
    font-size: 10px;
    padding: 2px 4px;
    width: 95%;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   cursor: pointer;
 }

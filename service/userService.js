@@ -17,7 +17,7 @@ module.exports = {
       }
 
       let user = await userModel.getUserByID(userData.id);
-      console.log(user);
+
       //generation token
       const token = tokenService.generationToken(user.id, user.login,
          user.email, user.status, user.verify, user.avatar);

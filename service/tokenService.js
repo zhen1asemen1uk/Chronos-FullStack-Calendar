@@ -33,7 +33,7 @@ class TokenService {
    async validateAccessToken(accessToken) {
       try {
          const userData = jwt.verify(accessToken, JWT_ACCESS_SECRET);
-
+         
          return userData
       } catch (error) {
          console.log(error);

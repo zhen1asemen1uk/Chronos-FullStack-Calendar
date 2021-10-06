@@ -69,12 +69,9 @@ export const eventAPI = {
             console.log(error);
          } finally {
             dispatch(isLoading_Auth(false));
-
          }
       }
    },
-
-
    addEvent(title, content, date) {
       return async (dispatch) => {
          try {
@@ -94,8 +91,6 @@ export const eventAPI = {
          }
       }
    },
-
-
    updateEvent(id, title, content, date) {
       return async (dispatch) => {
          try {
@@ -110,7 +105,6 @@ export const eventAPI = {
          }
       }
    },
-
    deleteEvent(id) {
       return async (dispatch) => {
          try {
@@ -125,7 +119,6 @@ export const eventAPI = {
          }
       }
    },
-
    search(data) {
       return async (dispatch) => {
          try {

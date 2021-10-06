@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
       let authorization = req.headers.authorization;
 
       if (!authorization) {
-         return res.status(403).json({ message: `Error authorization` });
+         return res.status(403).json({ message: `User not loggined` });
       }
       const accessToken = authorization.split(` `)[1];
 
@@ -23,6 +23,6 @@ module.exports = async (req, res, next) => {
 
    } catch (error) {
       console.log(error);
-      return res.status(403).json({ message: `User not loggined` });
+      return res.status(403).json({ message: `Error authorization` });
    }
 };

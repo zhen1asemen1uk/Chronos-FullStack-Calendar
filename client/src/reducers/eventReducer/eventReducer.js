@@ -34,14 +34,15 @@ export const eventReducer = (state = initialState, action) => {
          }
 
       case getEventByUserIDAndTime_Type:
+
          return {
             ...state, eventDataForMonth: action.payload
          }
 
-
       case addEvent_Type:
-         return {
-            ...state, eventsData: state.eventsData.concat({ ...action.payload })
+
+      return {
+            ...state, eventDataForMonth: [ ...state.eventDataForMonth, action.payload]
          }
 
       case updateEvent_Type:
