@@ -23,24 +23,23 @@ export const authReducer = (state = initialState, action) => {
    switch (action.type) {
 
       case register_Type:
-         console.log(action.payload.data);
-         if (typeof action.payload.data == "object") {
-            return { ...state, user: action.payload.data.user, isModal: false }
+      if (typeof action.payload == "object") {
+            return { ...state, user: action.payload.user, isModal: false }
          }
-         return { ...state, user: action.payload.data }
+         return { ...state, user: action.payload }
 
 
       case login_Type:
-         if (typeof action.payload.data == "object") {
-            localStorage.setItem('token', action.payload.data.accessToken);
+         if (typeof action.payload == "object") {
+            localStorage.setItem('token', action.payload.accessToken);
 
-            const obj = JSON.stringify(action.payload.data.user);
+            const obj = JSON.stringify(action.payload.user);
             localStorage.setItem('userData', obj);
 
             state.isAuth = true;
-            return { ...state, user: action.payload.data.user, isModal: false }
+            return { ...state, user: action.payload.user, isModal: false }
          }
-         return { ...state, user: action.payload.data }
+         return { ...state, user: action.payload }
 
 
       case verify_Type:

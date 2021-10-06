@@ -39,7 +39,8 @@ export const authAPI = {
                login: login,
                password: password
             })
-            return dispatch(login_Auth(dataLogin));
+            // console.log(dataLogin.data.user.id);
+            return dispatch(login_Auth(dataLogin.data));
          }
          catch (error) {
             console.log(`Error login ${error}`);

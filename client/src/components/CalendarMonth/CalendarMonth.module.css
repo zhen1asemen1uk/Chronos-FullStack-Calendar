@@ -8,9 +8,6 @@
 }
 
 .day {
-   display: flex;
-   justify-content: flex-end;
-   align-items: flex-start;
    color: rgb(223, 221, 223);
    background-color: #2b282c;
    padding: 5px;
@@ -19,14 +16,18 @@
 }
 
 .week {
-   display: flex;
-   justify-content: flex-end;
-   align-items: flex-start;
    color: rgb(223, 221, 223);
    background-color: #2f2b2f;
    min-width: 100px;
    min-height: 60px;
    padding: 5px;
+}
+
+.day, .week {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-end;
 }
 
 .numDay {
@@ -47,6 +48,18 @@
    background-color: red;
 }
 
-.numAnotherMonth{
+.numAnotherMonth {
    opacity: 0.35;
+}
+
+.events {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-start;
+   font-weight: bold; 
+   border-radius: 5px;
+   font-size: 10px;
+   padding: 2px 4px;
+   width: 95%;
 }

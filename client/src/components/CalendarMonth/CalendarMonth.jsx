@@ -1,14 +1,19 @@
 import React from 'react';
 
 import stl from './CalendarMonth.module.css'
+import ControlBarConteiner from './ControlBar/ControlBarConteiner';
+import WeekBar from './WeekBar/WeekBar';
 
 const CalendarMonth = (props) => {
-   const { today, arrDays } = props;
+   const { today, arrDays, eventDataForMonth } = props;
 
-   return (
+   return (<>
+      <ControlBarConteiner />
+      <WeekBar />
       <div className={stl.wrapp}>{
          arrDays.map((numDay) => {
-
+            const startDay = numDay.clone().startOf("day").format('X');
+            const endDay = numDay.clone().endOf("day").format('X');
             const classWeek = () => {
                if (numDay.day() === 0 || numDay.day() === 6) {
                   return `${stl.week}`
@@ -26,17 +31,29 @@ const CalendarMonth = (props) => {
                   return `${stl.numDay}`
                }
             }
+            const eventsOfDay = () => {
+               return eventDataForMonth
+                  .filter(e => e.date >= startDay && e.date <= endDay)
+                  .map(e => <li key={e.date} > {e.title}</li>)
+
+            }
 
             return (
                <div key={numDay.format('DDMMYYYY')} className={classWeek()}>
+
                   <div className={classNum()}>
-                     {numDay.format('D')}
+                     <div>{numDay.format('D')}</div>
                   </div>
+
+                  <ul className={stl.events}>
+                     {eventsOfDay()}
+                  </ul>
+
                </div>
             )
          })
       }</div >
-   );
+   </>);
 };
 
 export default CalendarMonth;

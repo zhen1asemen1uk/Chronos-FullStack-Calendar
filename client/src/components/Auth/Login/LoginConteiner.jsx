@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import { authAPI } from '../../../API/authAPI';
-import { eventAPI } from '../../../API/eventAPI';
+// import { eventAPI } from '../../../API/eventAPI';
 import { isModal_Auth, modalChildren_Auth } from '../../../reducers/authReducer/authReducer';
 
 import Loading from '../Loading/Loading';
@@ -21,7 +21,8 @@ const LoginConteiner = () => {
 
    const sendLoginData = (login, password) => {
       dispatch(authAPI.login(login, password));
-      dispatch(eventAPI.getAllEvents());
+      // dispatch(eventAPI.getAllEvents());
+      // dispatch(eventAPI.getEventByUserIDAndTime(authState.user.id, gte, lte)); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    }
 
    return (<>

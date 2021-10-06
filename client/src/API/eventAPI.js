@@ -9,7 +9,8 @@ import {
    getEventByUserID_Event,
    getEventByID_Event,
    updateEvent_Event,
-   search_Event
+   search_Event,
+   getEventByUserIDAndTime_Event
 } from '../reducers/eventReducer/eventReducer';
 
 export const eventAPI = {
@@ -49,6 +50,21 @@ export const eventAPI = {
             const dataEvents = await api.get(`/api/event/${id}/user`)
 
             return dispatch(getEventByUserID_Event(dataEvents.data));
+         } catch (error) {
+            console.log(error);
+         } finally {
+            dispatch(isLoading_Auth(false));
+
+         }
+      }
+   },
+   getEventByUserIDAndTime(id, gte, lte) {
+      return async (dispatch) => {
+         try {
+            dispatch(isLoading_Auth(true));
+            const dataEvents = await api.get(`/api/event/${id}/${gte}/${lte}`)
+
+            return dispatch(getEventByUserIDAndTime_Event(dataEvents.data));
          } catch (error) {
             console.log(error);
          } finally {

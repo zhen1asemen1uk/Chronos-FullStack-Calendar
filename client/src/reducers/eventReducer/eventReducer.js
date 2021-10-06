@@ -2,6 +2,7 @@ import {
    getAllEvents_Type,
    getEventByID_Type,
    getEventByUserID_Type,
+   getEventByUserIDAndTime_Type,
    addEvent_Type,
    updateEvent_Type,
    deleteEvent_Type,
@@ -11,8 +12,9 @@ import {
 export const initialState = {
    eventsData: [],
    eventDataByID: [],
+   eventDataForMonth: [],
    eventDataByUserID: [],
-   filterEvents:[]
+   filterEvents: []
 }
 
 export const eventReducer = (state = initialState, action) => {
@@ -31,11 +33,17 @@ export const eventReducer = (state = initialState, action) => {
             ...state, eventDataByUserID: action.payload
          }
 
+      case getEventByUserIDAndTime_Type:
+         return {
+            ...state, eventDataForMonth: action.payload
+         }
+
 
       case addEvent_Type:
          return {
             ...state, eventsData: state.eventsData.concat({ ...action.payload })
          }
+
       case updateEvent_Type:
          return { ...state }
 
@@ -63,6 +71,7 @@ export const eventReducer = (state = initialState, action) => {
 export const getAllEvents_Event = (payload) => ({ type: getAllEvents_Type, payload });
 export const getEventByID_Event = (payload) => ({ type: getEventByID_Type, payload });
 export const getEventByUserID_Event = (payload) => ({ type: getEventByUserID_Type, payload });
+export const getEventByUserIDAndTime_Event = (payload) => ({ type: getEventByUserIDAndTime_Type, payload });
 
 export const addEvent_Event = (payload) => ({ type: addEvent_Type, payload });
 export const updateEvent_Event = (payload) => ({ type: updateEvent_Type, payload });
