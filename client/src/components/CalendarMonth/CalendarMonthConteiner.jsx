@@ -9,6 +9,7 @@ const CalendarMonthConteiner = () => {
    const dispatch = useDispatch();
 
    const user = useSelector(state => state.authState.user);
+   const isAuth = useSelector(state => state.authState.isAuth);
    const today = useSelector(state => state.monthState.today);
    const eventDataForMonth = useSelector(state => state.eventState.eventDataForMonth);
 
@@ -42,6 +43,7 @@ const CalendarMonthConteiner = () => {
    return (
       <CalendarMonth
          today={today}
+         isAuth={isAuth}
          arrDays={arrDays}
          eventDataForMonth={eventDataForMonth}
          isModalSet={isModalSet} />

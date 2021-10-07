@@ -71,7 +71,7 @@ module.exports = {
             const { title, content, date } = req.body;
             let id_author_event = req.user.id;
 
-            let dateFormat = moment(date, "DD MM YYYY").format("X")
+            const dateFormat = moment(date, "DD MM YYYY").format("X");
 
             const createEvent = await eventModel.createEvent(title, content, dateFormat, id_author_event);
 
@@ -102,7 +102,8 @@ module.exports = {
                const updateDescriptionByID = await eventModel.updateDescriptionByID(event_id, content);
             }
             if (date) {
-               const updateDateByID = await eventModel.updateDateByID(event_id, date);
+               const dateFormat = moment(date, "DD MM YYYY").format("X");
+               const updateDateByID = await eventModel.updateDateByID(event_id, dateFormat);
             }
 
             return res.send(`Event update!`);

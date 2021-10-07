@@ -22,4 +22,5 @@
    border-right: 1px solid #464648;
    border-bottom: 2px solid #464648;
    background-color: rgb(41, 36, 41);
+   overflow: auto;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import AddEventConteiner from '../Event/AddEventConteiner';
+import AddEventConteiner from '../Event/AddEvent/AddEventConteiner';
 import LoginConteiner from '../Auth/Login/LoginConteiner';
 import RegisterConteiner from '../Auth/Register/RegisterConteiner';
 
@@ -10,6 +10,7 @@ import stl from './HeaderBar.module.css';
 
 const HeaderBar = (props) => {
    const API_URL = process.env.REACT_APP_HOST;
+
    const { isModal, isModalSet,
       search, setSearch,
       modalChildren,
@@ -22,11 +23,14 @@ const HeaderBar = (props) => {
          <Modal isModal={isModal} isModalSet={isModalSet} children={modalChildren} />
 
          <div className={stl.oneBTN}>
-            <button className={stl.btn} onClick={() => {
-               isModalSet(true, <AddEventConteiner />)
-            }}>
-               +
-            </button>
+            {isAuth ?
+               <button className={stl.btn} onClick={() => {
+                  isModalSet(true, <AddEventConteiner />)
+               }}>
+                  +
+               </button> :
+               <></>
+            }
          </div>
 
          <div className={stl.fourBTN}>

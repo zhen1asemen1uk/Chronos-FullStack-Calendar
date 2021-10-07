@@ -1,6 +1,8 @@
+import moment from 'moment';
 import api from '.'
 
 import { isLoading_Auth, isModal_Auth } from '../reducers/authReducer/authReducer';
+import { todayMonth } from '../reducers/monthReducer/monthReducer';
 import {
    addEvent_Event,
    deleteEvent_Event,
@@ -95,26 +97,30 @@ export const eventAPI = {
       return async (dispatch) => {
          try {
             dispatch(isLoading_Auth(true));
-            const dataEvents = await api.patch(`/api/event/${id}`, { title: title, content: content, date: date })
+            const dataEvents = await api.patch(`/api/event/${id}`,
+               { title: title, content: content, date: date });
 
             return dispatch(updateEvent_Event(dataEvents.data));
          } catch (error) {
             console.log(error);
          } finally {
+            dispatch(todayMonth(moment(date, "DD.MM.YYYY")));
+            dispatch(isModal_Auth(false))
             dispatch(isLoading_Auth(false));
          }
       }
    },
-   deleteEvent(id) {
+   deleteEvent(id, date) {
       return async (dispatch) => {
          try {
             dispatch(isLoading_Auth(true));
             const deletedEvent = await api.delete(`/api/event/${id}`)
-
             return dispatch(deleteEvent_Event(deletedEvent.data));
          } catch (error) {
             console.log(error);
          } finally {
+            dispatch(todayMonth(moment(date, "DD.MM.YYYY")));
+            dispatch(isModal_Auth(false))
             dispatch(isLoading_Auth(false));
          }
       }

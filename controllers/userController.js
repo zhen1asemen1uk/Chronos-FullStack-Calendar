@@ -58,10 +58,10 @@ module.exports = {
          const link = req.params.link;
 
          let activeUser = await userModel.activateUser_check(link);
-      
-            if (!activeUser) {
-               return res.send(`Uncorrect user!`);
-            }
+
+         if (!activeUser) {
+            return res.send(`Uncorrect user!`);
+         }
 
          await userModel.activateUser_updateVerify(link);
 
@@ -141,7 +141,7 @@ module.exports = {
          const owner = req.params.user_id;
          //check unique users
          let check = await userModel.getUser(login, email);
-       
+
          if (check.length > 0) {
             return res.send(`Login or email is already in use!`);
          }

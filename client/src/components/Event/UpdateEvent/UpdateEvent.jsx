@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import stl from './Event.module.css'
+import stl from '../Event.module.css'
 
-const AddEvent = (props) => {
+const UpdateEvent = (props) => {
    const { title, setTitle,
       content, setContent,
       date, setDate,
-      addEvent, error } = props;
+      updateEvent,
+      deleteEvent } = props;
 
    return (
       <>
@@ -32,22 +33,28 @@ const AddEvent = (props) => {
 
             <br />
 
-            {
-               date.match(/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/) &&
-                content.length > 0 &&
-                title.length>0?
-                  <button className={stl.btn} onClick={() => {
-                     addEvent(title, content, date);
-                  }}>add</button> :
-                  <div>Enter all fields</div>            }
+            <div className={stl.btnWrapp}>
+               {
+                  date.match(/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/) &&
+                     content.length > 0 &&
+                     title.length > 0 ?
 
-            {error ?
-               <div>{error}</div> :
-               <></>
-            }
+                     <button className={stl.btn}
+                        onClick={() => {
+                           updateEvent(title, content, date)
+                        }}>Update</button>
+                     :
+                     <div>Enter all fields</div>
+               }
+
+               <button className={`${stl.btn} ${stl.btnDelete}`}
+                  onClick={
+                     deleteEvent
+                  }>Delete</button>
+            </div>
          </div>
       </>
    )
+};
 
-}
-export default AddEvent
+export default UpdateEvent;

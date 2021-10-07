@@ -7,6 +7,7 @@ import HeaderBar from './HeaderBar';
 
 const HeaderBarConteiner = () => {
    const dispatch = useDispatch();
+   
    const isAuth = useSelector(state => state.authState.isAuth);
    const user = useSelector(state => state.authState.user);
    const isModal = useSelector(state => state.authState.isModal);

@@ -43,6 +43,10 @@
    cursor: pointer;
 }
 
+li:hover {
+   color: red;
+}
+
 .numToday {
    color: black;
    border: 1px solid red;
@@ -51,7 +55,7 @@
 
 .numAnotherMonth {
    opacity: 0.35;
-   cursor:default;
+   cursor: default;
 }
 
 .events {
