@@ -41,8 +41,8 @@ export const eventReducer = (state = initialState, action) => {
 
       case addEvent_Type:
 
-      return {
-            ...state, eventDataForMonth: [ ...state.eventDataForMonth, action.payload]
+         return {
+            ...state, eventDataForMonth: [...state.eventDataForMonth, action.payload]
          }
 
       case updateEvent_Type:

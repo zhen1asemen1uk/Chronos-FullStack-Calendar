@@ -107,6 +107,7 @@ export const authAPI = {
             dispatch(isLoading_Auth(true));
             const dataLogout = await api.post(`/api/auth/logout`);
             dispatch(getEventByUserIDAndTime_Event([]));
+            
             return dispatch(logout_Auth(dataLogout))
          } catch (error) {
             console.log(`Error logout ${error}`);
