@@ -23,7 +23,7 @@ const HeaderBarConteiner = () => {
       dispatch(isModal_Auth(set))
       dispatch(modalChildren_Auth(child))
    }
-
+console.log(search);
 
    return (
       <>
