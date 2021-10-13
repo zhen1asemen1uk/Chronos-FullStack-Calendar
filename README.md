@@ -1,7 +1,7 @@
 # chronos
 
-  must be:    /.env
-  in .env:    
+    must be:    /.env
+    in .env:    
               HOST=http://localhost:
               PORT=5000
 
@@ -19,8 +19,9 @@
               DB_PASSWORD=...
               DB_LOGIN=db_chronos
 
-   must be:    /.client/env
-   in .env:   
+
+    must be:    /.client/env
+    in .env:   
                REACT_APP_HOST = http://localhost:5000
 
 #For start:
