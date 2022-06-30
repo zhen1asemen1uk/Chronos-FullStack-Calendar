@@ -22,7 +22,7 @@
 
     must be:    /.client/env
     in .env:   
-               REACT_APP_HOST = http://localhost:5000
+               REACT_APP_HOST = http://localhost:5001
 
 #For start:
          
