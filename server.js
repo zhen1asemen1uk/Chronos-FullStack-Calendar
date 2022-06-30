@@ -12,12 +12,11 @@ const fileUpload = require(`express-fileupload`);
 app.use(fileUpload({}));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-app.use(
-    cors({
-        credentials: true,
-        origin: `*`,
-    })
-);
+// app.use(
+//     cors({
+//         origin: `*`,
+//     })
+// );
 app.use(cookieParser());
 app.use(express.static(`public`));
 
@@ -26,7 +25,7 @@ app.use(require(`./routers`));
 //for CORS
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Credentials", true);
+
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
     res.header(
         "Access-Control-Allow-Headers",
