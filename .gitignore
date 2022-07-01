@@ -1,24 +1,25 @@
-# dependencies
-/node_modules
+package-lock.json
 
-/.pnp
+node_modules
+coverage
+.DS_Store
+
+.pnp
 .pnp.js
 .idea
 .yarn
+
+yarn.lock
+
 # testing
 /coverage
 
 # next.js
-/.next/
-/out/
+.next/
+out/
 
-# production
-/build
 build
-coverage
 
-# misc
-.DS_Store
 *.pem
 
 # debug
@@ -39,5 +40,3 @@ yarn-error.log*
 .vercel
 
 *.xml
-
-yarn.lock
