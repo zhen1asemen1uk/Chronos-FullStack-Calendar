@@ -1,82 +1,100 @@
 import {
-   getAllEvents_Type,
-   getEventByID_Type,
-   getEventByUserID_Type,
-   getEventByUserIDAndTime_Type,
-   addEvent_Type,
-   updateEvent_Type,
-   deleteEvent_Type,
-   search_Type
-} from "./types";
+	getAllEvents_Type,
+	getEventByID_Type,
+	getEventByUserID_Type,
+	getEventByUserIDAndTime_Type,
+	addEvent_Type,
+	updateEvent_Type,
+	deleteEvent_Type,
+	search_Type,
+} from './types';
 
 export const initialState = {
-   eventsData: [],
-   eventDataByID: [],
-   eventDataForMonth: [],
-   eventDataByUserID: [],
-   filterEvents: []
-}
+	eventsData: [],
+	eventDataByID: [],
+	eventDataForMonth: [],
+	eventDataByUserID: [],
+	filterEvents: [],
+};
 
 export const eventReducer = (state = initialState, action) => {
-   switch (action.type) {
+	switch (action.type) {
+		case getAllEvents_Type:
+			return { ...state, eventsData: action.payload };
 
-      case getAllEvents_Type:
-         return { ...state, eventsData: action.payload }
+		case getEventByID_Type:
+			return {
+				...state,
+				eventDataByID: action.payload,
+			};
 
-      case getEventByID_Type:
-         return {
-            ...state, eventDataByID: action.payload
-         }
+		case getEventByUserID_Type:
+			return {
+				...state,
+				eventDataByUserID: action.payload,
+			};
 
-      case getEventByUserID_Type:
-         return {
-            ...state, eventDataByUserID: action.payload
-         }
+		case getEventByUserIDAndTime_Type:
+			return {
+				...state,
+				eventDataForMonth: action.payload,
+			};
 
-      case getEventByUserIDAndTime_Type:
+		case addEvent_Type:
+			return {
+				...state,
+				eventDataForMonth: [...state.eventDataForMonth, action.payload],
+			};
 
-         return {
-            ...state, eventDataForMonth: action.payload
-         }
+		case updateEvent_Type:
+			return { ...state };
 
-      case addEvent_Type:
+		case deleteEvent_Type:
+			return { ...state };
 
-         return {
-            ...state, eventDataForMonth: [...state.eventDataForMonth, action.payload]
-         }
+		case search_Type:
+			const title = state.eventsData.filter((word) => {
+				return word.title_event.includes(action.payload);
+			});
+			const content = state.eventsData.filter((word) => {
+				return word.content_event.includes(action.payload);
+			});
 
-      case updateEvent_Type:
-         return { ...state }
+			const filterEventsData = title
+				.concat(content)
+				.filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i);
 
-      case deleteEvent_Type:
-         return { ...state }
+			return { ...state, filterEvents: filterEventsData };
 
-      case search_Type:
-         const title = state.eventsData.filter((word) => {
-            return word.title_event.includes(action.payload);
-         });
-         const content = state.eventsData.filter((word) => {
-            return word.content_event.includes(action.payload)
-         });
+		default:
+			return state;
+	}
+};
 
-         const filterEventsData = title.concat(content).filter(
-            (v, i, a) => a.findIndex(t => (t.id === v.id)) === i)
-
-         return { ...state, filterEvents: filterEventsData }
-
-      default:
-         return state
-   }
-}
-
-export const getAllEvents_Event = (payload) => ({ type: getAllEvents_Type, payload });
-export const getEventByID_Event = (payload) => ({ type: getEventByID_Type, payload });
-export const getEventByUserID_Event = (payload) => ({ type: getEventByUserID_Type, payload });
-export const getEventByUserIDAndTime_Event = (payload) => ({ type: getEventByUserIDAndTime_Type, payload });
+export const getAllEvents_Event = (payload) => ({
+	type: getAllEvents_Type,
+	payload,
+});
+export const getEventByID_Event = (payload) => ({
+	type: getEventByID_Type,
+	payload,
+});
+export const getEventByUserID_Event = (payload) => ({
+	type: getEventByUserID_Type,
+	payload,
+});
+export const getEventByUserIDAndTime_Event = (payload) => ({
+	type: getEventByUserIDAndTime_Type,
+	payload,
+});
 
 export const addEvent_Event = (payload) => ({ type: addEvent_Type, payload });
-export const updateEvent_Event = (payload) => ({ type: updateEvent_Type, payload });
-export const deleteEvent_Event = (payload) => ({ type: deleteEvent_Type, payload });
+export const updateEvent_Event = (payload) => ({
+	type: updateEvent_Type,
+	payload,
+});
+export const deleteEvent_Event = (payload) => ({
+	type: deleteEvent_Type,
+	payload,
+});
 export const search_Event = (payload) => ({ type: search_Type, payload });
-
-

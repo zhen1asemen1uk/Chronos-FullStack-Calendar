@@ -3,11 +3,7 @@ import React from 'react';
 import CalendarYear from './CalendarYear';
 
 const CalendarYearConteiner = () => {
-
-   return (
-      <CalendarYear />
-   )
-
+	return <CalendarYear />;
 };
 
 export default CalendarYearConteiner;
