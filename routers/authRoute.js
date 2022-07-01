@@ -13,8 +13,15 @@ router.post(`/logout`, authController.logout);
 
 router.get(`/refresh`, authController.refresh);
 
-router.post(`/password-reset`, verifyMiddleware(), authController.password_reset);
+router.post(
+	`/password-reset`,
+	verifyMiddleware(),
+	authController.password_reset
+);
 
-router.post(`/password-reset/:confirm_token`, authController.password_reset_confirm);
+router.post(
+	`/password-reset/:confirm_token`,
+	authController.password_reset_confirm
+);
 
 module.exports = router;

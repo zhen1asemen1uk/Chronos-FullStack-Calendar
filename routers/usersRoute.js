@@ -15,8 +15,16 @@ router.post(`/`, statusMiddleware([`admin`]), authController.createUser_ADMIN);
 
 router.patch(`/avatar`, userController.addAvatar);
 
-router.patch(`/:user_id`, userAccessMiddleware(), userController.updateDataUserByID);
+router.patch(
+	`/:user_id`,
+	userAccessMiddleware(),
+	userController.updateDataUserByID
+);
 
-router.delete(`/:user_id`, userAccessMiddleware(), userController.deleteUserByID);
+router.delete(
+	`/:user_id`,
+	userAccessMiddleware(),
+	userController.deleteUserByID
+);
 
-module.exports = router; 
+module.exports = router;

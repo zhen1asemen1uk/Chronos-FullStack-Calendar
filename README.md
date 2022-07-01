@@ -1,7 +1,7 @@
 # chronos
 
     must be:    /.env
-    in .env:    
+    in .env:
               HOST=http://localhost:
               PORT=5000
 
@@ -21,11 +21,11 @@
 
 
     must be:    /.client/env
-    in .env:   
+    in .env:
                REACT_APP_HOST = http://localhost:5001
 
 #For start:
-         
+
       npm i (Install the module separately in the server folder and in the client folder)
 
       npm run dev - start server and client
