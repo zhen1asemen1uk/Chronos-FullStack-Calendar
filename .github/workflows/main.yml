@@ -22,9 +22,15 @@ on:
 jobs:
   # example splitting all tests across GitHub machines
   prepare:
+    environment: .env
     runs-on: ubuntu-20.04
+    steps:    
+      - name: Print .env "TEST"
+        run: echo "TEST => ${{ vars.TEST }}"
+        
+      - name: Print .env "TEST_2"
+        run: echo "TEST_2 => ${{ secrets.TEST_2 }}"
     
-    steps:
       - name: Print .env "ORIGIN"
         run: echo "ORIGIN => ${{ vars.ORIGIN }}"
 
@@ -33,11 +39,5 @@ jobs:
 
       - name: Print .env "DB_PWD"
         run: echo "DB_PWD => ${{ vars.DB_PWD }}"
-        
-      - name: Print .env "TEST"
-        run: echo "TEST => ${{ vars.TEST }}"
-        
-      - name: Print .env "TEST_2"
-        run: echo "TEST_2 => ${{ secrets.TEST_2 }}"
         
       
