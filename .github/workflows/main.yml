@@ -1,0 +1,35 @@
+name: Main
+
+env:
+  ORIGIN: ${{ secrets.ORIGIN }}
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_PWD: ${{ secrets.DB_PWD }}
+
+on:
+  workflow_dispatch:
+  # Run once a day at 8:00am.
+  schedule:
+    - cron: '0 0,8 * * *'
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  # example splitting all tests across GitHub machines
+  prepare:
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Print .env
+        run: echo "ORIGIN => ${{ secrets.ORIGIN }}"
+
+      - name: Print .env
+        run: echo "DB_HOST => ${{ secrets.DB_HOST }}"
+
+      - name: Print .env
+        run: echo "DB_PWD => ${{ secrets.DB_PWD }}"
+        
+      
