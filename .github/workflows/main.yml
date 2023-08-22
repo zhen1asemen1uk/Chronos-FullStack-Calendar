@@ -14,10 +14,10 @@ on:
     - cron: '0 0,8 * * *'
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   # example splitting all tests across GitHub machines
