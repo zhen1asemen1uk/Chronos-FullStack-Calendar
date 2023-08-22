@@ -25,13 +25,19 @@ jobs:
     runs-on: ubuntu-20.04
     
     steps:
-      - name: Print .env
+      - name: Print .env "ORIGIN"
         run: echo "ORIGIN => ${{ secrets.ORIGIN }}"
 
-      - name: Print .env
+      - name: Print .env "DB_HOST"
         run: echo "DB_HOST => ${{ secrets.DB_HOST }}"
 
-      - name: Print .env
+      - name: Print .env "DB_PWD"
         run: echo "DB_PWD => ${{ secrets.DB_PWD }}"
+        
+      - name: Print .env "TEST"
+        run: echo "TEST => ${{ secrets.TEST }}"
+        
+      - name: Print .env "TEST_2"
+        run: echo "TEST_2 => ${{ secrets.TEST_2 }}"
         
       
